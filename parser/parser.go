@@ -10,7 +10,7 @@ import (
 )
 
 const (
-	FilesDir          = "\\files\\"
+	FilesDir          = "\\input\\"
 	outputDir         = "\\output\\"
 	incorrectDataFile = "errors.json"
 	outputFile        = "output.json"

@@ -55,7 +55,6 @@ func (r FileType1) Read() []models.Employee {
 			} else {
 				BadData = append(BadData, error)
 			}
-
 		}
 	}
 	return Employers
