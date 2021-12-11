@@ -2,44 +2,31 @@ package parser
 
 import (
 	"csv/models"
-	"encoding/csv"
 	"fmt"
-	"log"
 	"os"
 )
 
 const (
-	name   = iota // 0
-	email         // 1
-	salary        // 2
-	id            // 3
-
-	fileName = "roster1.csv"
+	name     = iota // 0
+	email           // 1
+	salary          // 2
+	id              // 3
+	FileName = "roster1.csv"
 )
 
 type FileType1 struct {
 }
 
-func (r FileType1) Read() []models.Employee {
+func (r FileType1) Read() {
 	basePath, _ := os.Getwd()
-	path := basePath + FilesDir + fileName
+	path := basePath + FilesDir + FileName
 
-	csvFile, err := os.Open(path)
+	csvLines := OpenFile(path, FileName)
 
-	if err != nil {
-		log.Fatal(err)
-	} else {
-		fmt.Println("Successfully Opened" + fileName + "file")
-
-		defer csvFile.Close()
-
-		fmt.Println("Reading CSV file...")
-		csvLines, err := csv.NewReader(csvFile).ReadAll()
-		if err != nil {
-			log.Fatal(err)
-		}
-
+	if len(csvLines) > 0 {
 		fmt.Println("Validating data...")
+		Employers = []models.Employee{}
+
 		for row := 1; row < len(csvLines); row++ {
 			emp := models.Employee{
 				Name:   csvLines[row][name],
@@ -48,14 +35,16 @@ func (r FileType1) Read() []models.Employee {
 				Id:     csvLines[row][id],
 			}
 
-			error := Validate(emp)
+			errorMessage := Validate(emp)
 
-			if len(error.errors) == 0 {
+			if len(errorMessage) == 0 {
 				Employers = append(Employers, emp)
 			} else {
-				BadData = append(BadData, error)
+				emp.Erros = errorMessage
+				BadData = append(BadData, emp)
 			}
 		}
+	} else {
+		fmt.Println("The file" + FileName + "is empty")
 	}
-	return Employers
 }

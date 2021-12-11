@@ -5,4 +5,5 @@ type Employee struct {
 	Name   string
 	Salary string
 	Email  string
+	Erros  string
 }

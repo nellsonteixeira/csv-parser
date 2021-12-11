@@ -7,8 +7,8 @@ import (
 func main() {
 	var fileType1 parser.FileType1
 
-	data := fileType1.Read()
-	parser.SaveData(data)
+	fileType1.Read()
 
-	parser.SaveWrongData(parser.BadData)
+	parser.SaveData()
+	parser.SaveWrongData()
 }
