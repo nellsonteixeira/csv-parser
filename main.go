@@ -6,7 +6,6 @@ import (
 
 func main() {
 	var fileType1 parser.FileType1
-
 	fileType1.Read()
 
 	parser.SaveData()
