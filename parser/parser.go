@@ -22,34 +22,34 @@ var Employers []models.Employee
 var BadData []models.Employee
 
 func Validate(emp models.Employee) string {
-	var erro string
+	var err string
 
-	ind := sort.Search(len(Employers), func(ind int) bool {
+	duplicated := sort.Search(len(Employers), func(ind int) bool {
 		return Employers[ind].Email <= emp.Email || Employers[ind].Id <= emp.Id
 	})
 	if len(emp.Email) > 0 && len(emp.Email) > 0 &&
-		ind < len(Employers) &&
-		(Employers[ind].Email == emp.Email || Employers[ind].Id == emp.Id) {
-		erro += "Id or Email already entered."
+		duplicated < len(Employers) &&
+		(Employers[duplicated].Email == emp.Email || Employers[duplicated].Id == emp.Id) {
+		err += "Id or Email already entered."
 	}
 
 	if len(emp.Id) == 0 {
-		erro += "Id is Required."
+		err += "Id is Required."
 	}
 
 	if len(emp.Email) == 0 {
-		erro += "Email is Required."
+		err += "Email is Required."
 	}
 
 	if len(emp.Name) == 0 {
-		erro += "Name is Required."
+		err += "Name is Required."
 	}
 
 	if len(emp.Salary) == 0 {
-		erro += "Salary is Required."
+		err += "Salary is Required."
 	}
 
-	return erro
+	return err
 }
 
 func OpenFile(path string, fileName string) [][]string {
