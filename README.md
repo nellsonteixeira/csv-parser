@@ -19,7 +19,7 @@ To add new file structures you just need to extend the function Read() for the n
    cd test
    go test
 ```
-3. Build <br />
+3. Build app<br />
 ```sh
   go build
 ```
