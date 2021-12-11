@@ -20,5 +20,6 @@ To add new file structures you just need to extend the function Read() for the n
    go test
 ```
 3. Build <br />
-  go build
 ```sh
+  go build
+```
